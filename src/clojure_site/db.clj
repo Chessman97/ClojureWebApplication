@@ -12,45 +12,45 @@
 
 ; создадим переменную соединения с БД
 (defonce db
-         (let [uri "mongodb://127.0.0.1:27017/maildb"
+         (let [uri "mongodb://127.0.0.1:27017/tech"
                {:keys [db]} (mg/connect-via-uri uri)]
            db))
 
-(defn remove-mail
+(defn remove-tech
   "Удалить письмо по ее id"
   [id]
   ; переформатируем строку в id
   (let [id (ObjectId. id)]
-    (m/remove-by-id db "mail" id)))
+    (m/remove-by-id db "tech" id)))
 
-(defn update-mail
+(defn update-tech
   "Обновить письмо по ее id"
-  [id mail]
+  [id tech]
   ; Переформатируем строку в id
   ; todo редактирование не работает
   (let [id (ObjectId. id)]
-    (m/update db "mail" {:_id id} mail)))
+    (m/update db "tech" {:_id id} tech)))
 
-(defn get-mail
+(defn get-tech
   "Получить письмо по ее id"
   [id]
   (let [id (ObjectId. id)]
     ; Эта функция вернет hash-map найденного документа
-    (m/find-map-by-id db "mail" id)))
+    (m/find-map-by-id db "tech" id)))
 
-(defn get-mails
+(defn get-techs
   "Получить все письма"
   []
   ; Find-maps возвращает все документы
   ; из коллеции в виде hash-map
-  (m/find-maps db "mail"))
+  (m/find-maps db "tech"))
 
-(defn create-mail
+(defn create-tech
   "Создать письмо в БД"
   ; Наше письмо принимается от котролера
   ; и имеет тип hash-map c видом:
   ; {:subject "Заголовок" :text "Содержание"}
-  [mail]
+  [tech]
   ; Monger может сам создать id
   ; но разработчиками настоятельно рекомендуется
   ; добавить это поле самостоятельно
@@ -59,6 +59,6 @@
     ; функции создания документа, только
     ; добавим в него сгенерированный id
     ; и штамп даты и времени создания
-    (m/insert db "mail" (assoc mail
+    (m/insert db "tech" (assoc tech
                            :_id object-id))))
 

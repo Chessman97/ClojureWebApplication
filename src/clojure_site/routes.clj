@@ -15,12 +15,12 @@
     [clojure-site.db :as db]))
 
 ; объявляем маршруты
-(defroutes mail-routes
+(defroutes tech-routes
 
            ; страница просмотра письма
-           (GET "/mail/:id" [id]
-             (let [mail (db/get-mail id)]
-               (v/mail mail)))
+           (GET "/tech/:id" [id]
+             (let [tech (db/get-tech id)]
+               (v/tech tech)))
 
            ; контроллер удаления письма по id
            (GET "/delete/:id" [id]
@@ -32,8 +32,8 @@
 
            ; страница редактирования письма
            (GET "/edit/:id" [id]
-             (let [mail (db/get-mail id)]
-               (v/edit mail)))
+             (let [tech (db/get-tech id)]
+               (v/edit tech)))
 
            ; обработчик добавления письма
            (POST "/create" request
@@ -45,8 +45,8 @@
 
            ; главная страница приложения
            (GET "/" []
-             (let [mails (db/get-mails)]
-               (v/index mails)))
+             (let [techs (db/get-techs)]
+               (v/index techs)))
 
            ; ошибка 404
            (route/not-found "Ничего не найдено"))

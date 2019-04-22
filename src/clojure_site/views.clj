@@ -26,36 +26,36 @@
         ; значения которые хотели бы получать
         ; на любой странице
         (assoc params
-          :title "Менеджер писем"
+          :title "Специальная техника"
           :page (str template)))
       ; Из всего этого сделаем HTTP ответ
       response
       (content-type "text/html; charset=utf-8")))
 
-(defn mail
-  "Страница просмотра письма"
-  [mail]
-  (render "mail.html"
+(defn tech
+  "Страница просмотра"
+  [tech]
+  (render "tech.html"
           ; передаем данные в шаблон
-          {:mail mail}))
+          {:tech tech}))
 
 (defn edit
-  "Страница редактирования письма"
-  [mail]
+  "Страница редактирования"
+  [tech]
   (render "edit.html"
           ; передаем данные в шаблон
-          {:mail mail}))
+          {:tech tech}))
 
 (defn create
-  "Страница создания письма"
+  "Страница создания"
   []
   (render "create.html"))
 
 (defn index
-  "Главная страница приложения. Список писем"
-  [mails]
+  "Главная страница приложения"
+  [techs]
   (render "index.html"
           ; Передаем данные в шаблон
-          ; Если mails пуст вернуть false
-          {:mails (if (not-empty mails)
-                    mails false)}))
+          ; Если techs пуст вернуть false
+          {:techs (if (not-empty techs)
+                    techs false)}))
